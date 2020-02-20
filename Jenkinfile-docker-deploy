@@ -41,15 +41,15 @@ stages {
  }
  stage('Sonarqube') {
     environment {
-        scannerHome = tool 'sonarqube'
+        scannerHome = tool 'sonar'
     }
     steps {
-        withSonarQubeEnv('sonarqube') {
+        withSonarQubeEnv('sonar') {
             sh "${scannerHome}/bin/sonar-scanner"
         }
-        timeout(time: 12, unit: 'MINUTES') {
-            waitForQualityGate abortPipeline: true
-        }
+       // timeout(time: 12, unit: 'MINUTES') {
+        //    waitForQualityGate abortPipeline: true
+        //}
     }
 }
      stage('Artifact upload') {
